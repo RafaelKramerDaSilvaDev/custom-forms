@@ -13,9 +13,12 @@ export function NewButtonForm() {
 				<FormControl isRequired>
 					<FormLabel>Funcionalidade do Botão</FormLabel>
 					<Select placeholder='Selecione a funcionalidade do botão'>
-						<option value='option1'>Salvar</option>
-						<option value='option2'>Limpar Campo Acima</option>
-						<option value='option1'>Limpar Todos os Campos</option>
+						<option>Salvar</option>
+						<option>Salvar e Sair</option>
+						<option>Salvar e Novo</option>
+						<option>Cancelar (Sai do Formulário)</option>
+						<option>Limpar Campo Acima</option>
+						<option>Limpar Todos os Campos</option>
 					</Select>
 				</FormControl>
 				<Button colorScheme='blue'>Adicionar Botão</Button>

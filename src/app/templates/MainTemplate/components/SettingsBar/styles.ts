@@ -13,3 +13,7 @@ export const SettingsBarContainer = styled.div`
 	padding-left: 20px;
 	gap: 20px;
 `;
+
+export const Instruction = styled.div`
+	line-height: 1;
+`;

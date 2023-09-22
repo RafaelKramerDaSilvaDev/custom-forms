@@ -4,3 +4,5 @@ export interface NewFieldProps {
 	placeholder?: string;
 	isRequired?: boolean;
 }
+
+export interface NewButtonProps {}
