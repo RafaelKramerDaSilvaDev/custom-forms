@@ -1,13 +1,22 @@
-import { Button, FormControl, FormErrorMessage, FormLabel, Input, Select, Stack } from '@chakra-ui/react';
+import {
+	Button,
+	FormControl,
+	FormErrorMessage,
+	FormHelperText,
+	FormLabel,
+	Input,
+	Select,
+	Stack,
+} from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
 import { NewInputContainer, Title } from './styles';
 
 const schema = object({
+	type: string().required('Campo Tipo de Dado é Obrigatório'),
 	name: string().required('Campo Nome é Obrigatório'),
 	label: string().required('Campo Label é Obrigatório'),
-	type: string().required('Campo Tipo de Dado é Obrigatório'),
 	text: string().required('Campo Texto é Obrigatório'),
 	requirement: string().required('Campo Requisito é Obrigatório'),
 }).required();
@@ -29,18 +38,8 @@ export function NewInputForm() {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
 			<NewInputContainer>
-				<Title>Criar Nova Entrada</Title>
+				<Title>Criar Novo Campo De Entrada</Title>
 				<Stack>
-					<FormControl isRequired isInvalid={Boolean(errors.name)}>
-						<FormLabel>Nome</FormLabel>
-						<Input type='text' placeholder='Digite o nome da entrada' {...register('name')} />
-						{errors.name && <FormErrorMessage>{errors.name.message}</FormErrorMessage>}
-					</FormControl>
-					<FormControl isRequired isInvalid={Boolean(errors.label)}>
-						<FormLabel>Label</FormLabel>
-						<Input type='text' placeholder='Digite o nome da label' {...register('label')} />
-						{errors.label && <FormErrorMessage>{errors.label.message}</FormErrorMessage>}
-					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.type)}>
 						<FormLabel>Tipo de Dado</FormLabel>
 						<Select placeholder='Selecione o tipo de dado da entrada' {...register('type')}>
@@ -61,7 +60,14 @@ export function NewInputForm() {
 							<option value='option2'>Sim ou Não</option>
 							<option value='option2'>Cor</option>
 						</Select>
-						{errors.type && <FormErrorMessage>{errors.type.message}</FormErrorMessage>}
+						{errors.type ? (
+							<FormErrorMessage>{errors.type.message}</FormErrorMessage>
+						) : (
+							<FormHelperText>
+								Defina o tipo de dado aceito pelo Campo De Entrada. Se um tipo diferente for inserido no formulário, ele
+								exibirá um erro e impedirá a continuação.
+							</FormHelperText>
+						)}
 					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.requirement)}>
 						<FormLabel>Requisito</FormLabel>
@@ -69,7 +75,31 @@ export function NewInputForm() {
 							<option value='option1'>Obrigatório</option>
 							<option value='option2'>Opcional</option>
 						</Select>
-						{errors.requirement && <FormErrorMessage>{errors.requirement.message}</FormErrorMessage>}
+						{errors.requirement ? (
+							<FormErrorMessage>{errors.requirement.message}</FormErrorMessage>
+						) : (
+							<FormHelperText>Defina se esse é um Campo de Entrada obrigatório ou opcional.</FormHelperText>
+						)}
+					</FormControl>
+					<FormControl isRequired isInvalid={Boolean(errors.name)}>
+						<FormLabel>Nome</FormLabel>
+						<Input type='text' placeholder='Digite o nome da entrada' {...register('name')} />
+						{errors.name ? (
+							<FormErrorMessage>{errors.name.message}</FormErrorMessage>
+						) : (
+							<FormHelperText>O nome serve apenas como identificador do Campo De Entrada.</FormHelperText>
+						)}
+					</FormControl>
+					<FormControl isRequired isInvalid={Boolean(errors.label)}>
+						<FormLabel>Label</FormLabel>
+						<Input type='text' placeholder='Digite o nome da label' {...register('label')} />
+						{errors.label ? (
+							<FormErrorMessage>{errors.label.message}</FormErrorMessage>
+						) : (
+							<FormHelperText>
+								A Label é o texto exibido acima do Campo de Entrada para identificar o campo.
+							</FormHelperText>
+						)}
 					</FormControl>
 					<Button type='submit' colorScheme='blue'>
 						Adicionar Entrada

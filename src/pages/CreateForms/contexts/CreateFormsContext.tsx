@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useContext, useState } from 'react';
 import { OptionSettingsBar } from '../types/OptionSettingsBar';
+import { NewButtonProps, NewInputProps } from '../types';
 
 type CreateFormsContextType = {
 	optionSettingsBar: OptionSettingsBar;
@@ -14,6 +15,8 @@ type CreateFormsProviderProps = {
 
 export function CreateFormsProvider({ children }: CreateFormsProviderProps) {
 	const [optionSettingsBar, setOptionSettingsBar] = useState<OptionSettingsBar>('input');
+	const [newInputs, setNewInputs] = useState<NewInputProps[]>([]);
+	const [newButtons, setNewButtons] = useState<NewButtonProps[]>([]);
 
 	return (
 		<CreateFormsContext.Provider value={{ optionSettingsBar, setOptionSettingsBar }}>

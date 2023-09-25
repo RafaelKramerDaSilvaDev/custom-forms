@@ -61,7 +61,7 @@ export function NewButtonForm() {
 						{errors.functionality ? (
 							<FormErrorMessage>{errors.functionality.message}</FormErrorMessage>
 						) : (
-							<FormHelperText>Defina qual funcionalidade vai atribuir ao botão.</FormHelperText>
+							<FormHelperText>Defina qual funcionalidade vai atribuir ao Botão.</FormHelperText>
 						)}
 					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.text)}>
@@ -72,7 +72,7 @@ export function NewButtonForm() {
 						{errors.linkFunctionality ? (
 							<FormErrorMessage>{errors.linkFunctionality.message}</FormErrorMessage>
 						) : (
-							<FormHelperText>Defina ao que vai vincular a funcionalidade do botão.</FormHelperText>
+							<FormHelperText>Defina ao que vai vincular a funcionalidade do Botão.</FormHelperText>
 						)}
 					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.text)}>
@@ -81,7 +81,7 @@ export function NewButtonForm() {
 						{errors.text ? (
 							<FormErrorMessage>{errors.text.message}</FormErrorMessage>
 						) : (
-							<FormHelperText>Texto que aparece no botão.</FormHelperText>
+							<FormHelperText>Texto que aparece no Botão.</FormHelperText>
 						)}
 					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.name)}>
@@ -90,7 +90,7 @@ export function NewButtonForm() {
 						{errors.name ? (
 							<FormErrorMessage>{errors.name.message}</FormErrorMessage>
 						) : (
-							<FormHelperText>O nome serve apenas como identificador do botão.</FormHelperText>
+							<FormHelperText>O nome serve apenas como identificador do Botão.</FormHelperText>
 						)}
 					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.linkName)}>
@@ -100,7 +100,7 @@ export function NewButtonForm() {
 							<FormErrorMessage>{errors.linkName.message}</FormErrorMessage>
 						) : (
 							<FormHelperText>
-								O nome da vinculação serve apenas como identificador da vinculação do botão e sua funcionalidade.
+								O nome da vinculação serve apenas como identificador da vinculação do Botão e sua funcionalidade.
 							</FormHelperText>
 						)}
 					</FormControl>
