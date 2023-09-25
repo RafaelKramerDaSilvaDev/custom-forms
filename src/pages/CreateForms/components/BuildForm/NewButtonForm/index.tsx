@@ -9,10 +9,10 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
 import { NewButtonContainer, Title } from './styles';
-import { useEffect } from 'react';
 
 const schema = object({
 	functionality: string().required('Campo Funcionalidade é Obrigatório.'),

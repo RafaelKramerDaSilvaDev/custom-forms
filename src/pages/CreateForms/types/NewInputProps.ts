@@ -1,6 +1,9 @@
 export type NewInputProps = {
 	id: string;
-	label?: string;
-	placeholder?: string;
-	isRequired?: boolean;
+	dataType: string;
+	name: string;
+	label: string;
+	placeholder: string;
+	isRequired: boolean;
+	initialValue?: string;
 };
