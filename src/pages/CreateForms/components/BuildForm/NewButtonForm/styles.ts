@@ -1,9 +1,0 @@
-import styled from 'styled-components';
-
-export const NewButtonContainer = styled.div``;
-
-export const Title = styled.h1`
-	font-size: ${({ theme }) => theme.height.small};
-	font-weight: 600;
-	margin-bottom: 20px;
-`;

@@ -1,0 +1,17 @@
+export type InputDataType =
+	| 'Texto'
+	| 'TextoLongo'
+	| 'Numero'
+	| 'CPF'
+	| 'CNPJ'
+	| 'CPFouCNPJ'
+	| 'NumeroDeTelefone'
+	| 'Data'
+	| 'Hora'
+	| 'Email'
+	| 'URL'
+	| 'CEP'
+	| 'Moeda'
+	| 'Senha'
+	| 'SimOuNao'
+	| 'Cor';

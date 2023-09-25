@@ -10,7 +10,24 @@ export const BuildFormContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-	font-size: ${({ theme }) => theme.height.small};
+	font-size: 22px;
 	font-weight: 600;
 	margin-bottom: 20px;
+	text-transform: uppercase;
+
+	span {
+		font-weight: 700;
+	}
 `;
+
+export const Description = styled.p`
+	font-size: 16px;
+	font-weight: 500;
+	margin-bottom: 20px;
+
+	span {
+		font-weight: 700;
+	}
+`;
+
+export const Container = styled.div``;

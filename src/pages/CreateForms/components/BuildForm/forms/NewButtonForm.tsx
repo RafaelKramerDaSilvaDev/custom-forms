@@ -12,7 +12,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
-import { NewButtonContainer, Title } from './styles';
+import { Container, Description, Title } from '../styles';
 
 const schema = object({
 	functionality: string().required('Campo Funcionalidade é Obrigatório.'),
@@ -45,8 +45,14 @@ export function NewButtonForm() {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
-			<NewButtonContainer>
-				<Title>Criar Novo Botão</Title>
+			<Container>
+				<Title>
+					Criar Novo: <span>Botão</span>
+				</Title>
+				<Description>
+					O <span>Botão</span> é um elemento clicável que executa uma ação específica, como enviar informações ou abrir
+					um menu.
+				</Description>
 				<Stack>
 					<FormControl isRequired isInvalid={Boolean(errors.functionality)}>
 						<FormLabel>Funcionalidade</FormLabel>
@@ -108,7 +114,7 @@ export function NewButtonForm() {
 						Adicionar Botão
 					</Button>
 				</Stack>
-			</NewButtonContainer>
+			</Container>
 		</form>
 	);
 }

@@ -9,6 +9,8 @@ export const ContentContainer = styled.div`
 		'content';
 	grid-template-rows: 60px auto;
 	background-color: ${({ theme }) => theme.colors.white};
+	height: calc(100vh - 100px);
+	overflow: auto;
 `;
 
 export const ContentStylized = styled.div`
