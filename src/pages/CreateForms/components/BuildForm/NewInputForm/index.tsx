@@ -1,18 +1,23 @@
-import { Button, FormControl, FormLabel, Input, Select, Stack } from '@chakra-ui/react';
+import { Button, FormControl, FormErrorMessage, FormLabel, Input, Select, Stack } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
 import { NewInputContainer, Title } from './styles';
 
 const schema = object({
-	functionality: string().required('Campo Funcionalidade do Botão é Obrigatório'),
-	text: string().required('Campo Texto do Botão é Obrigatório'),
+	name: string().required('Campo Nome é Obrigatório'),
+	label: string().required('Campo Label é Obrigatório'),
+	type: string().required('Campo Tipo de Dado é Obrigatório'),
+	text: string().required('Campo Texto é Obrigatório'),
+	requirement: string().required('Campo Requisito é Obrigatório'),
 }).required();
 
 export function NewInputForm() {
 	const {
 		register,
 		handleSubmit,
+		watch,
+		setValue,
 		formState: { errors },
 	} = useForm<FormData>({
 		resolver: yupResolver(schema),
@@ -22,21 +27,23 @@ export function NewInputForm() {
 	const onSubmit = (data: FormData) => {};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit(onSubmit)} noValidate>
 			<NewInputContainer>
-				<Title>Entrada</Title>
+				<Title>Criar Nova Entrada</Title>
 				<Stack>
-					<FormControl isRequired>
+					<FormControl isRequired isInvalid={Boolean(errors.name)}>
 						<FormLabel>Nome</FormLabel>
-						<Input type='text' placeholder='Digite o nome da entrada' />
+						<Input type='text' placeholder='Digite o nome da entrada' {...register('name')} />
+						{errors.name && <FormErrorMessage>{errors.name.message}</FormErrorMessage>}
 					</FormControl>
-					<FormControl isRequired>
+					<FormControl isRequired isInvalid={Boolean(errors.label)}>
 						<FormLabel>Label</FormLabel>
-						<Input type='text' placeholder='Digite o nome da label' />
+						<Input type='text' placeholder='Digite o nome da label' {...register('label')} />
+						{errors.label && <FormErrorMessage>{errors.label.message}</FormErrorMessage>}
 					</FormControl>
-					<FormControl isRequired>
+					<FormControl isRequired isInvalid={Boolean(errors.type)}>
 						<FormLabel>Tipo de Dado</FormLabel>
-						<Select placeholder='Selecione o tipo de dado da entrada'>
+						<Select placeholder='Selecione o tipo de dado da entrada' {...register('type')}>
 							<option value='option1'>Texto</option>
 							<option value='option1'>Texto Longo</option>
 							<option value='option2'>Número</option>
@@ -54,15 +61,19 @@ export function NewInputForm() {
 							<option value='option2'>Sim ou Não</option>
 							<option value='option2'>Cor</option>
 						</Select>
+						{errors.type && <FormErrorMessage>{errors.type.message}</FormErrorMessage>}
 					</FormControl>
-					<FormControl isRequired>
+					<FormControl isRequired isInvalid={Boolean(errors.requirement)}>
 						<FormLabel>Requisito</FormLabel>
-						<Select placeholder='Selecione o requisito da entrada'>
+						<Select placeholder='Selecione o requisito da entrada' {...register('requirement')}>
 							<option value='option1'>Obrigatório</option>
 							<option value='option2'>Opcional</option>
 						</Select>
+						{errors.requirement && <FormErrorMessage>{errors.requirement.message}</FormErrorMessage>}
 					</FormControl>
-					<Button colorScheme='blue'>Adicionar Entrada</Button>
+					<Button type='submit' colorScheme='blue'>
+						Adicionar Entrada
+					</Button>
 				</Stack>
 			</NewInputContainer>
 		</form>

@@ -2,7 +2,7 @@ import { Button } from '@chakra-ui/react';
 import { FaSave } from 'react-icons/fa';
 import { ImCancelCircle } from 'react-icons/im';
 import { NewButtonContainer } from './styles';
-import { ButtonConfig, ButtonVariant } from './types';
+import { ButtonVariant, ButtonConfig } from '../../types';
 
 const buttonConfigs: Record<ButtonVariant, ButtonConfig> = {
 	save: { icon: <FaSave />, text: 'Salvar', colorScheme: 'green' },

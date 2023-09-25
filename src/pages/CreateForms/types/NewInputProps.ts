@@ -1,8 +1,6 @@
-export interface NewInputProps {
+export type NewInputProps = {
 	id: string;
 	label?: string;
 	placeholder?: string;
 	isRequired?: boolean;
-}
-
-export interface NewButtonProps {}
+};
