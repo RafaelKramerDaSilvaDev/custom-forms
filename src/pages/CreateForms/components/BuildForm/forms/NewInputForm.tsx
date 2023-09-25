@@ -22,7 +22,7 @@ const schema = object({
 	dataType: string().required('Campo Tipo de Dado é Obrigatório'),
 	name: string().required('Campo Nome é Obrigatório'),
 	label: string().required('Campo Label é Obrigatório'),
-	placeholder: string().required('Campo Texto de Dica é Obrigatório'),
+	placeholder: string().required('Campo Dica é Obrigatório'),
 	isRequired: string().required('Campo Requisito é Obrigatório'),
 	formHelperText: string(),
 	initialValue: string(),
@@ -97,15 +97,15 @@ export function NewInputForm() {
 						)}
 					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.placeholder)}>
-						<FormLabel>Texto de Dica</FormLabel>
+						<FormLabel>Dica</FormLabel>
 						<Input type='text' placeholder='Digite o nome da entrada' {...register('placeholder')} />
 						{errors.placeholder ? (
 							<FormErrorMessage>{errors.placeholder.message}</FormErrorMessage>
 						) : (
 							<FormHelperText>
-								O Texto de Dica, também conhecido como placeholder, serve como uma dica ou sugestão sobre o que o
-								usuário deve inserir naquele Campo de Entrada. Esse texto é exibido dentro do campo e desaparece assim
-								que o usuário começa a digitar.
+								A Dica, também conhecido como placeholder, serve como uma dica ou sugestão sobre o que o usuário deve
+								inserir naquele Campo de Entrada. Esse texto é exibido dentro do campo e desaparece assim que o usuário
+								começa a digitar.
 							</FormHelperText>
 						)}
 					</FormControl>
