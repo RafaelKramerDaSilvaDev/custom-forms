@@ -1,14 +1,14 @@
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
-import { NewFieldContainer } from './styles';
-import { NewFieldProps } from '../types';
+import { NewInputContainer } from './styles';
+import { NewInputProps } from '../types';
 
-export function NewField({ label, placeholder, isRequired }: NewFieldProps) {
+export function NewInput({ label, placeholder, isRequired }: NewInputProps) {
 	return (
-		<NewFieldContainer>
+		<NewInputContainer>
 			<FormControl isRequired={isRequired}>
 				<FormLabel>{label}</FormLabel>
 				<Input placeholder={placeholder} />
 			</FormControl>
-		</NewFieldContainer>
+		</NewInputContainer>
 	);
 }

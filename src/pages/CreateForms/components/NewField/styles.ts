@@ -1,3 +1,3 @@
 import styled from 'styled-components';
 
-export const NewFieldContainer = styled.div``;
+export const NewInputContainer = styled.div``;

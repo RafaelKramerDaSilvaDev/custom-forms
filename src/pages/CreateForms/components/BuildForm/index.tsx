@@ -1,6 +1,6 @@
 import { useCreateForms } from '../../contexts/CreateFormsContext';
 import { NewButtonForm } from './NewButtonForm';
-import { NewFieldForm } from './NewFieldForm';
+import { NewInputForm } from './NewInputForm';
 import { BuildFormContainer } from './styles';
 
 export function BuildForm() {
@@ -8,7 +8,7 @@ export function BuildForm() {
 
 	return (
 		<BuildFormContainer>
-			{optionSettingsBar === 'field' && <NewFieldForm />}
+			{optionSettingsBar === 'input' && <NewInputForm />}
 			{optionSettingsBar === 'button' && <NewButtonForm />}
 		</BuildFormContainer>
 	);

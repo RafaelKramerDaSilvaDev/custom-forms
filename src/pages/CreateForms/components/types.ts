@@ -1,4 +1,4 @@
-export interface NewFieldProps {
+export interface NewInputProps {
 	id: string;
 	label?: string;
 	placeholder?: string;
