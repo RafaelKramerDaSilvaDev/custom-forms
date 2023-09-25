@@ -47,11 +47,12 @@ export function NewInputForm() {
 	useEffect(() => {
 		const newPlaceholder = watchDataType && `${getPlaceholder(watchDataType)}`;
 		const newFormHelperText = watchDataType && `${getFormHelperText(watchDataType)}`;
+		const formattedValue = InputDataTypeOptions[watchDataType];
 
 		setValue('placeholder', newPlaceholder);
-		setValue('name', watchDataType);
-		setValue('label', watchDataType);
 		setValue('formHelperText', newFormHelperText);
+		setValue('name', formattedValue);
+		setValue('label', formattedValue);
 	}, [watchDataType]);
 
 	return (
@@ -103,8 +104,8 @@ export function NewInputForm() {
 						) : (
 							<FormHelperText>
 								O Texto de Dica, também conhecido como placeholder, serve como uma dica ou sugestão sobre o que o
-								usuário deve inserir naquele campo de entrada. Esse texto é exibido de forma leve dentro do campo e
-								desaparece assim que o usuário começa a digitar.
+								usuário deve inserir naquele Campo de Entrada. Esse texto é exibido dentro do campo e desaparece assim
+								que o usuário começa a digitar.
 							</FormHelperText>
 						)}
 					</FormControl>
