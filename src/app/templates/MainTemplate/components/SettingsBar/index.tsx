@@ -12,7 +12,7 @@ export function SettingsBar() {
 
 	return (
 		<SettingsBarContainer>
-			<Instruction>Selecione o Elemento:</Instruction>
+			<Instruction>Selecione o Componente:</Instruction>
 			<Button variant='link' colorScheme='black' onClick={() => handleSetOption('input')}>
 				Entrada
 			</Button>
