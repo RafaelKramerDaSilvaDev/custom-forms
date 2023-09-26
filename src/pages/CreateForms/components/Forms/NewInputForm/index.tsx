@@ -11,8 +11,11 @@ import {
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
 import { InferType, object, string } from 'yup';
-import { Container, Description, Title } from '../../styles';
+import { useCreateForms } from '../../../contexts/CreateFormsContext';
+import { DataType } from '../../NewInput/types';
+import { Container, Description, Title } from '../styles';
 import { InputDataTypeOptions } from './constants';
 import { InputDataType } from './types';
 import { getFormHelperText } from './utils/getFormHelperText';
@@ -23,12 +26,13 @@ const schema = object({
 	name: string().required('Campo Nome é Obrigatório'),
 	label: string().required('Campo Label é Obrigatório'),
 	placeholder: string().required('Campo Dica é Obrigatório'),
-	isRequired: string().required('Campo Requisito é Obrigatório'),
+	isRequired: string().oneOf(['Obrigatório', 'Opcional']).required('Campo Requisito é Obrigatório'),
 	formHelperText: string(),
 	initialValue: string(),
 });
 
 export function NewInputForm() {
+	const { setForms } = useCreateForms();
 	const {
 		register,
 		handleSubmit,
@@ -40,7 +44,23 @@ export function NewInputForm() {
 	});
 	type FormData = InferType<typeof schema>;
 
-	const onSubmit = (data: FormData) => {};
+	const onSubmit = (data: FormData) => {
+		setForms((prev) => [
+			...prev,
+			{
+				type: 'input',
+				data: {
+					id: uuidv4(),
+					dataType: data.dataType as DataType,
+					name: data.name,
+					label: data.label,
+					placeholder: data.placeholder,
+					isRequired: data.isRequired === 'Obrigatório' ? true : false,
+					initialValue: data.initialValue,
+				},
+			},
+		]);
+	};
 
 	const watchDataType = watch('dataType') as InputDataType;
 
@@ -87,8 +107,8 @@ export function NewInputForm() {
 					<FormControl isRequired isInvalid={Boolean(errors.isRequired)}>
 						<FormLabel>Requisito</FormLabel>
 						<Select placeholder='Selecione o requisito da entrada' {...register('isRequired')}>
-							<option value='option1'>Obrigatório</option>
-							<option value='option2'>Opcional</option>
+							<option>Obrigatório</option>
+							<option>Opcional</option>
 						</Select>
 						{errors.isRequired ? (
 							<FormErrorMessage>{errors.isRequired.message}</FormErrorMessage>

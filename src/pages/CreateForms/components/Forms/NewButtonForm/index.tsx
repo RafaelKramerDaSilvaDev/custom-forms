@@ -12,9 +12,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
-import { Container, Description, Title } from '../../styles';
-import { useCreateForms } from '../../../../contexts/CreateFormsContext';
-import { ButtonAction } from '../../../NewButton/types';
+import { useCreateForms } from '../../../contexts/CreateFormsContext';
+import { ButtonAction } from '../../NewButton/types';
+import { Container, Description, Title } from '../styles';
 import { convertToButtonAction } from './convertToButtonAction';
 
 const schema = object({
@@ -26,7 +26,7 @@ const schema = object({
 }).required();
 
 export function NewButtonForm() {
-	const { setNewButtons } = useCreateForms();
+	const { setForms } = useCreateForms();
 
 	const {
 		register,
@@ -42,14 +42,17 @@ export function NewButtonForm() {
 	const onSubmit = (data: FormData) => {
 		const actionValue: ButtonAction = convertToButtonAction(data.action);
 
-		setNewButtons((prev) => [
+		setForms((prev) => [
 			...prev,
 			{
-				action: actionValue,
-				linkAction: data.linkAction,
-				text: data.text,
-				name: data.name,
-				linkName: data.linkName,
+				type: 'button',
+				data: {
+					action: actionValue,
+					linkAction: data.linkAction,
+					text: data.text,
+					name: data.name,
+					linkName: data.linkName,
+				},
 			},
 		]);
 	};
