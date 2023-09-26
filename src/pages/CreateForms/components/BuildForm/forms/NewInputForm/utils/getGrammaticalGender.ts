@@ -1,4 +1,4 @@
-import { InputDataType } from '../forms/types';
+import { InputDataType } from '../types';
 
 const GrammaticalGenderMap: Record<InputDataType, string> = {
 	Texto: 'o',

@@ -1,6 +1,6 @@
 import { useCreateForms } from '../../contexts/CreateFormsContext';
 import { NewButtonForm } from './forms/NewButtonForm';
-import { NewInputForm } from './forms/NewInputForm';
+import { NewInputForm } from './forms/NewInputForm/NewInputForm';
 import { BuildFormContainer } from './styles';
 
 export function BuildForm() {

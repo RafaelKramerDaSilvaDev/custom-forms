@@ -12,11 +12,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
-import { Container, Description, Title } from './../styles';
-import { getFormHelperText } from './../utils/getFormHelperText';
-import { getPlaceholder } from './../utils/getPlaceholder';
-import { InputDataType } from './types';
+import { Container, Description, Title } from '../../styles';
 import { InputDataTypeOptions } from './constants';
+import { InputDataType } from './types';
+import { getFormHelperText } from './utils/getFormHelperText';
+import { getPlaceholder } from './utils/getPlaceholder';
 
 const schema = object({
 	dataType: string().required('Campo Tipo de Dado é Obrigatório'),

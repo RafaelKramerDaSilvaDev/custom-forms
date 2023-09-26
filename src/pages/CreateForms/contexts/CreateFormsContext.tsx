@@ -1,12 +1,19 @@
 import { ReactNode, createContext, useContext, useState } from 'react';
-import { OptionSettingsBar } from '../types/OptionSettingsBar';
-import { NewButtonProps, NewFormProps, NewInputProps } from '../types/NewProps';
+import { OptionSettingsBar } from '../../../app/templates/MainTemplate/components/SettingsBar/types';
+import { NewInputProps } from '../components/NewInput/types';
+import { NewButtonProps } from '../components/NewButton/types';
+import { FormItem } from '../types';
+import { mockedFormItems } from './mockedFormItems';
 
 type CreateFormsContextType = {
 	optionSettingsBar: OptionSettingsBar;
 	setOptionSettingsBar: React.Dispatch<React.SetStateAction<OptionSettingsBar>>;
-	setForms: React.Dispatch<React.SetStateAction<NewFormProps[]>>;
-	forms: NewFormProps[];
+	newInputs: NewInputProps[];
+	setNewInputs: React.Dispatch<React.SetStateAction<NewInputProps[]>>;
+	newButtons: NewButtonProps[];
+	setNewButtons: React.Dispatch<React.SetStateAction<NewButtonProps[]>>;
+	forms: FormItem[];
+	setForms: React.Dispatch<React.SetStateAction<FormItem[]>>;
 };
 
 const CreateFormsContext = createContext<CreateFormsContextType>({} as CreateFormsContextType);
@@ -19,10 +26,21 @@ export function CreateFormsProvider({ children }: CreateFormsProviderProps) {
 	const [optionSettingsBar, setOptionSettingsBar] = useState<OptionSettingsBar>('input');
 	const [newInputs, setNewInputs] = useState<NewInputProps[]>([]);
 	const [newButtons, setNewButtons] = useState<NewButtonProps[]>([]);
-	const [forms, setForms] = useState<NewFormProps[]>([]);
+	const [forms, setForms] = useState<FormItem[]>([...mockedFormItems]);
 
 	return (
-		<CreateFormsContext.Provider value={{ optionSettingsBar, setOptionSettingsBar, forms, setForms }}>
+		<CreateFormsContext.Provider
+			value={{
+				optionSettingsBar,
+				setOptionSettingsBar,
+				newInputs,
+				setNewInputs,
+				newButtons,
+				setNewButtons,
+				forms,
+				setForms,
+			}}
+		>
 			{children}
 		</CreateFormsContext.Provider>
 	);

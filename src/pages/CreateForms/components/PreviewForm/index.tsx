@@ -1,34 +1,45 @@
-import { FormControl, FormLabel, Stack } from '@chakra-ui/react';
-import { mockedNewForm } from '../../contexts/mockedValues';
+import { Stack } from '@chakra-ui/react';
+import { useCreateForms } from '../../contexts/CreateFormsContext';
 import { NewButton } from '../NewButton';
 import { NewInput } from '../NewInput';
 import { PreviewFormContainer, Title } from './styles';
 
 export function PreviewForm() {
+	const { forms } = useCreateForms();
+
 	return (
 		<PreviewFormContainer>
 			<Title>Pré-visualização do Formulário</Title>
-			{mockedNewForm.map((form, formIndex) => (
-				<Stack key={formIndex}>
-					{form.input?.map((input) => (
-						<FormControl key={input.id}>
-							<FormLabel>{input.label}</FormLabel>
+			<Stack>
+				{forms.map((item, index) => {
+					if (item.type === 'input') {
+						const inputData = item.data;
+						return (
 							<NewInput
-								id={input.id}
-								label={input.label}
-								dataType={input.dataType} // Deixe a conversão de dataType para tipo de input ser gerenciada internamente por NewInput
-								name={input.name}
-								placeholder={input.placeholder}
-								isRequired={input.isRequired}
-								initialValue={input.initialValue}
+								key={inputData.id}
+								id={inputData.id}
+								label={inputData.label}
+								dataType={inputData.dataType}
+								isRequired={inputData.isRequired}
+								name={inputData.name}
+								placeholder={inputData.placeholder}
 							/>
-						</FormControl>
-					))}
-					{form.button?.map((button, btnIndex) => (
-						<NewButton key={btnIndex} config={button.config} variant={button.variant} />
-					))}
-				</Stack>
-			))}
+						);
+					} else if (item.type === 'button') {
+						const buttonData = item.data;
+						return (
+							<NewButton
+								key={index}
+								action={buttonData.action}
+								linkAction={buttonData.linkAction}
+								linkName={buttonData.linkName}
+								name={buttonData.name}
+								text={buttonData.text}
+							/>
+						);
+					}
+				})}
+			</Stack>
 		</PreviewFormContainer>
 	);
 }

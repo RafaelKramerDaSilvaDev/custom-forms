@@ -12,17 +12,22 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
-import { Container, Description, Title } from '../styles';
+import { Container, Description, Title } from '../../styles';
+import { useCreateForms } from '../../../../contexts/CreateFormsContext';
+import { ButtonAction } from '../../../NewButton/types';
+import { convertToButtonAction } from './convertToButtonAction';
 
 const schema = object({
-	functionality: string().required('Campo Funcionalidade é Obrigatório.'),
-	linkFunctionality: string().required('Campo Vincular Funcionalidade é Obrigatório.'),
+	action: string().required('Campo Funcionalidade é Obrigatório.'),
+	linkAction: string().required('Campo Vincular Funcionalidade é Obrigatório.'),
 	text: string().required('Campo Texto é Obrigatório.'),
 	name: string().required('Campo Nome é Obrigatório.'),
 	linkName: string().required('Campo Nome da Vinculação é Obrigatório.'),
 }).required();
 
 export function NewButtonForm() {
+	const { setNewButtons } = useCreateForms();
+
 	const {
 		register,
 		handleSubmit,
@@ -34,14 +39,27 @@ export function NewButtonForm() {
 	});
 	type FormData = InferType<typeof schema>;
 
-	const onSubmit = (data: FormData) => {};
+	const onSubmit = (data: FormData) => {
+		const actionValue: ButtonAction = convertToButtonAction(data.action);
 
-	const watchFunctionality = watch('functionality');
+		setNewButtons((prev) => [
+			...prev,
+			{
+				action: actionValue,
+				linkAction: data.linkAction,
+				text: data.text,
+				name: data.name,
+				linkName: data.linkName,
+			},
+		]);
+	};
+
+	const watchaction = watch('action');
 
 	useEffect(() => {
-		setValue('name', watchFunctionality);
-		setValue('text', watchFunctionality);
-	}, [watchFunctionality]);
+		setValue('name', watchaction);
+		setValue('text', watchaction);
+	}, [watchaction]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -54,9 +72,9 @@ export function NewButtonForm() {
 					um menu.
 				</Description>
 				<Stack>
-					<FormControl isRequired isInvalid={Boolean(errors.functionality)}>
-						<FormLabel>Funcionalidade</FormLabel>
-						<Select placeholder='Selecione a funcionalidade' {...register('functionality')}>
+					<FormControl isRequired isInvalid={Boolean(errors.action)}>
+						<FormLabel>Ação</FormLabel>
+						<Select placeholder='Selecione a ação' {...register('action')}>
 							<option>Salvar</option>
 							<option>Salvar e Sair</option>
 							<option>Salvar e Novo</option>
@@ -64,19 +82,19 @@ export function NewButtonForm() {
 							<option>Limpar Campo</option>
 							<option>Limpar Todos os Campos</option>
 						</Select>
-						{errors.functionality ? (
-							<FormErrorMessage>{errors.functionality.message}</FormErrorMessage>
+						{errors.action ? (
+							<FormErrorMessage>{errors.action.message}</FormErrorMessage>
 						) : (
 							<FormHelperText>Defina qual funcionalidade vai atribuir ao Botão.</FormHelperText>
 						)}
 					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.text)}>
 						<FormLabel>Vincular Funcionalidade</FormLabel>
-						<Select placeholder='Selecione a funcionalidade para vincular' {...register('linkFunctionality')}>
+						<Select placeholder='Selecione a funcionalidade para vincular' {...register('linkAction')}>
 							<option>Nome do Produto "isso é o input cadastrado pelo usuário"</option>
 						</Select>
-						{errors.linkFunctionality ? (
-							<FormErrorMessage>{errors.linkFunctionality.message}</FormErrorMessage>
+						{errors.linkAction ? (
+							<FormErrorMessage>{errors.linkAction.message}</FormErrorMessage>
 						) : (
 							<FormHelperText>Defina ao que vai vincular a funcionalidade do Botão.</FormHelperText>
 						)}

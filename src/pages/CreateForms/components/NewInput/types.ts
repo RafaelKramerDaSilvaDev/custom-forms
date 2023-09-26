@@ -1,3 +1,15 @@
+import { InputProps } from '../../../../app/shared/types/InputProps';
+
+export interface NewInputProps {
+	id: string;
+	dataType: DataType;
+	name: string;
+	label: string;
+	placeholder: string;
+	isRequired: boolean;
+	initialValue?: string;
+}
+
 export enum DataType {
 	Texto = 'Texto',
 	TextoLongo = 'TextoLongo',
@@ -17,7 +29,7 @@ export enum DataType {
 	Cor = 'Cor',
 }
 
-export const dataTypeToInputType: Record<DataType, HTMLInputElement['type']> = {
+export const dataTypeToInputType: Record<DataType, InputProps> = {
 	[DataType.Texto]: 'text',
 	[DataType.TextoLongo]: 'text',
 	[DataType.Numero]: 'number',

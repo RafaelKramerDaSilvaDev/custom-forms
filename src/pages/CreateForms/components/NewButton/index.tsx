@@ -1,11 +1,10 @@
 import { Button } from '@chakra-ui/react';
 import { FaSave } from 'react-icons/fa';
 import { ImCancelCircle } from 'react-icons/im';
-import { ButtonConfig, ButtonVariant } from '../../types';
-import { NewButtonProps } from '../../types/NewProps';
 import { NewButtonContainer } from './styles';
+import { ButtonAction, ButtonConfig, NewButtonProps } from './types';
 
-const buttonConfigs: Record<ButtonVariant, ButtonConfig> = {
+const buttonConfigs: Record<ButtonAction, ButtonConfig> = {
 	save: { icon: <FaSave />, text: 'Salvar', colorScheme: 'green' },
 	saveAndExit: { icon: <FaSave />, text: 'Salvar e Sair', colorScheme: 'green' },
 	saveAndNew: { icon: <FaSave />, text: 'Salvar e Novo', colorScheme: 'green' },
@@ -14,7 +13,9 @@ const buttonConfigs: Record<ButtonVariant, ButtonConfig> = {
 	clearAllFields: { icon: <ImCancelCircle />, text: 'Limpar Todos os Campos', colorScheme: 'red' },
 };
 
-export function NewButton({ config }: NewButtonProps) {
+export function NewButton({ action }: NewButtonProps) {
+	const config = buttonConfigs[action];
+
 	return (
 		<NewButtonContainer>
 			<Button leftIcon={config.icon} colorScheme={config.colorScheme}>

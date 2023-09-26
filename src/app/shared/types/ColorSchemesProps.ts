@@ -1,4 +1,4 @@
-export type ColorSchemes =
+export type ColorSchemesProps =
 	| 'whiteAlpha'
 	| 'blackAlpha'
 	| 'gray'
