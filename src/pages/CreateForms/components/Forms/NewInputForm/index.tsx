@@ -18,7 +18,8 @@ import { DataType } from '../../NewInput/types';
 import { Container, Description, Title } from '../styles';
 import { InputDataTypeOptions } from './constants';
 import { InputDataType } from './types';
-import { getPlaceholders } from './utils/getPlaceholders';
+import { getFormHelperText } from './utils/getFormHelperText';
+import { getPlaceholders } from '../../../helpers/getPlaceholders';
 
 const schema = object({
 	dataType: string().required('Campo Tipo de Dado é Obrigatório'),
@@ -64,34 +65,35 @@ export function NewInputForm() {
 	const watchDataType = watch('dataType') as InputDataType;
 	const watchName = watch('name');
 
-	// useEffect(() => {
-	// 	const newPlaceholder = watchDataType && `${getDefaultPlaceholders(watchDataType)}`;
-
-	// 	// const newPlaceholder = watchDataType && `${getPlaceholder(watchDataType)}`;
-	// 	const newFormHelperText = watchDataType && `${getFormHelperText(watchDataType)}`;
-	// 	const formattedValue = InputDataTypeOptions[watchDataType];
-
-	// 	setValue('placeholder', newPlaceholder);
-	// 	setValue('formHelperText', newFormHelperText);
-	// 	setValue('name', formattedValue);
-	// 	setValue('label', formattedValue);
-	// }, [watchDataType]);
-
 	useEffect(() => {
+		const newFormHelperText = watchDataType && `${getFormHelperText(watchDataType)}`;
+		const formattedValue = InputDataTypeOptions[watchDataType];
+
+		setValue('formHelperText', newFormHelperText);
+		setValue('label', formattedValue);
+
+		let placeholder;
+
 		if (watchDataType) {
-			const newPlaceholder = `${getPlaceholders(watchDataType)}`;
-			setValue('placeholder', newPlaceholder);
+			placeholder = getPlaceholders(watchDataType, null);
 		}
-		if (watchName) {
-			const newPlaceholder = `${getPlaceholders(watchName)}`;
-			setValue('placeholder', newPlaceholder);
+
+		// Checa se watchName é diferente de InputDataTypeOptions[watchDataType],
+		// o que indica que um valor personalizado foi digitado.
+		if (watchName && watchName !== InputDataTypeOptions[watchDataType]) {
+			placeholder = getPlaceholders(null, watchName);
 		}
-		if (watchName === '' && !watchDataType) {
-			setValue('placeholder', '');
-		}
+
+		setValue('placeholder', placeholder || '');
 
 		setValue('label', watchName);
 	}, [watchName, watchDataType]);
+
+	useEffect(() => {
+		// Atualiza o nome de Identificação quando o Tipo de Dado é alterado
+		const formattedValue = InputDataTypeOptions[watchDataType];
+		setValue('name', formattedValue);
+	}, [watchDataType]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>

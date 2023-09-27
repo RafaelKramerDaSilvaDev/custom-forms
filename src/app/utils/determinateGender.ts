@@ -1,5 +1,7 @@
-export function determinateGender(word: string): string {
-	if (!word) return 'Indeterminate';
+export function determinateGender(input: string): string {
+	if (!input) return '';
+
+	const word = input.split(' ')[0].trim();
 
 	const feminineEndings = ['a', 'dade', 'ção', 'são', 'tude', 'gem'];
 
