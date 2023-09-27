@@ -13,13 +13,15 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import { InferType, object, string } from 'yup';
+import { COMBOBOX_OPTIONS_TEXT, DEFAULT_LABELS } from '../../../constants';
 import { useCreateForms } from '../../../contexts/CreateFormsContext';
 import { DataType } from '../../../enums/DataType';
 import { getFormHelperText } from '../../../helpers/getFormHelperText';
 import { getPlaceholders } from '../../../helpers/getPlaceholders';
 import { InputDataType } from '../../../types/InputDataType';
 import { Container, Description, Title } from '../styles';
-import { ComboBoxOptionsText } from '../../../constants';
+import { DEFAULT_NAMES } from '../../../constants/DEFAULT_NAMES';
+import { checkPlaceholderExistence } from '../../../validators/checkPlaceholderExistence';
 
 const schema = object({
 	dataType: string().required('Campo Tipo de Dado é Obrigatório'),
@@ -33,6 +35,7 @@ const schema = object({
 
 export function NewInputForm() {
 	const [nameModified, setNameModified] = useState(false);
+	const [placeholderExistence, setPlaceholderExistence] = useState(false);
 
 	const { setForms } = useCreateForms();
 	const {
@@ -68,16 +71,17 @@ export function NewInputForm() {
 	const watchName = watch('name');
 
 	useEffect(() => {
-		const formattedValue = ComboBoxOptionsText[watchDataType];
+		const newLabel = DEFAULT_LABELS[watchDataType];
+		const newName = DEFAULT_NAMES[watchDataType];
 
 		if (!nameModified) {
-			setValue('name', formattedValue);
+			setValue('name', newName);
 		}
 
-		if (!watchName || watchName === ComboBoxOptionsText[watchDataType]) {
-			setValue('label', formattedValue);
+		if (!watchName || watchName === COMBOBOX_OPTIONS_TEXT[watchDataType]) {
+			setValue('label', newLabel);
 		} else {
-			setValue('label', watchName);
+			setValue('label', newLabel);
 		}
 
 		let placeholder;
@@ -88,13 +92,15 @@ export function NewInputForm() {
 			formHelperText = getFormHelperText(watchDataType, null);
 		}
 
-		if (watchName && watchName !== ComboBoxOptionsText[watchDataType]) {
+		if (watchName && watchName !== COMBOBOX_OPTIONS_TEXT[watchDataType]) {
 			placeholder = getPlaceholders(null, watchName);
 			formHelperText = getFormHelperText(null, watchName);
 		}
 
 		setValue('placeholder', placeholder || '');
 		setValue('formHelperText', formHelperText || '');
+
+		setPlaceholderExistence(checkPlaceholderExistence(watchDataType));
 	}, [watchName, watchDataType]);
 
 	return (
@@ -111,7 +117,7 @@ export function NewInputForm() {
 					<FormControl isRequired isInvalid={Boolean(errors.dataType)}>
 						<FormLabel>Tipo de Dado</FormLabel>
 						<Select defaultValue='Texto' {...register('dataType')}>
-							{Object.entries(ComboBoxOptionsText).map(([key, value]) => (
+							{Object.entries(COMBOBOX_OPTIONS_TEXT).map(([key, value]) => (
 								<option key={key} value={key}>
 									{value}
 								</option>
@@ -139,7 +145,7 @@ export function NewInputForm() {
 						)}
 					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.name)}>
-						<FormLabel>Nome de Identificação</FormLabel>
+						<FormLabel>Nome do Campo Personalizado</FormLabel>
 						<Input
 							type='text'
 							placeholder='Digite o nome de identificação'
@@ -158,18 +164,20 @@ export function NewInputForm() {
 							</FormHelperText>
 						)}
 					</FormControl>
-					<FormControl isRequired isInvalid={Boolean(errors.placeholder)}>
-						<FormLabel>Placeholder</FormLabel>
-						<Input type='text' placeholder='Digite o placeholder' {...register('placeholder')} />
-						{errors.placeholder ? (
-							<FormErrorMessage>{errors.placeholder.message}</FormErrorMessage>
-						) : (
-							<FormHelperText>
-								Um placeholder indica o que inserir em um campo de entrada. Ele mostra uma dica no campo e some ao
-								começar a digitar.
-							</FormHelperText>
-						)}
-					</FormControl>
+					{placeholderExistence && (
+						<FormControl isRequired isInvalid={Boolean(errors.placeholder)}>
+							<FormLabel>Placeholder</FormLabel>
+							<Input type='text' placeholder='Digite o placeholder' {...register('placeholder')} />
+							{errors.placeholder ? (
+								<FormErrorMessage>{errors.placeholder.message}</FormErrorMessage>
+							) : (
+								<FormHelperText>
+									Um placeholder indica o que inserir em um campo de entrada. Ele mostra uma dica no campo e some ao
+									começar a digitar.
+								</FormHelperText>
+							)}
+						</FormControl>
+					)}
 					<FormControl isRequired isInvalid={Boolean(errors.label)}>
 						<FormLabel>Label</FormLabel>
 						<Input type='text' placeholder='Digite o nome da label' {...register('label')} />

@@ -1,12 +1,12 @@
 import { ReactNode, createContext, useContext, useState } from 'react';
 import { OptionSettingsBar } from '../../../app/templates/MainTemplate/components/SettingsBar/types';
-import { FormItem } from '../types';
+import { FormItemType } from '../types';
 
 type CreateFormsContextType = {
 	optionSettingsBar: OptionSettingsBar;
 	setOptionSettingsBar: React.Dispatch<React.SetStateAction<OptionSettingsBar>>;
-	forms: FormItem[];
-	setForms: React.Dispatch<React.SetStateAction<FormItem[]>>;
+	forms: FormItemType[];
+	setForms: React.Dispatch<React.SetStateAction<FormItemType[]>>;
 };
 
 const CreateFormsContext = createContext<CreateFormsContextType>({} as CreateFormsContextType);
@@ -17,7 +17,7 @@ type CreateFormsProviderProps = {
 
 export function CreateFormsProvider({ children }: CreateFormsProviderProps) {
 	const [optionSettingsBar, setOptionSettingsBar] = useState<OptionSettingsBar>('input');
-	const [forms, setForms] = useState<FormItem[]>([]);
+	const [forms, setForms] = useState<FormItemType[]>([]);
 
 	return (
 		<CreateFormsContext.Provider

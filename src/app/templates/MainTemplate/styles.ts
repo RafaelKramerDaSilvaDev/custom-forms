@@ -6,6 +6,6 @@ export const MainTemplateStylized = styled.div`
 		'header header'
 		'aside content';
 	grid-template-rows: 100px auto;
-	grid-template-columns: 400px auto;
+	grid-template-columns: 240px auto;
 	height: 100vh;
 `;

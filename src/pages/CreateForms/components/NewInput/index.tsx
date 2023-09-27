@@ -1,8 +1,8 @@
 import { FormControl, FormLabel, Input } from '@chakra-ui/react';
 import InputMask from 'react-input-mask';
+import { defineMasks } from '../../../../app/utils/defineMasks';
 import { NewInputContainer } from './styles';
 import { NewInputProps, dataTypeToInputType } from './types';
-import { defineMasks } from '../../../../app/utils/defineMasks';
 
 export function NewInput({ label, placeholder, isRequired, dataType, initialValue }: NewInputProps) {
 	const inputType = dataTypeToInputType[dataType];

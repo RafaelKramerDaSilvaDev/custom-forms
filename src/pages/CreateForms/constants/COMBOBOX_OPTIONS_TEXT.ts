@@ -1,6 +1,6 @@
 import { InputDataType } from '../types/InputDataType';
 
-export const ComboBoxOptionsText: Record<InputDataType, string> = {
+export const COMBOBOX_OPTIONS_TEXT: Record<InputDataType, string> = {
 	Texto: 'Texto (Tamanho Padrão)',
 	TextoGrande: 'Texto Grande (Tamanho Maior)',
 	Numero: 'Número (Aceita Apenas Números)',
@@ -11,7 +11,7 @@ export const ComboBoxOptionsText: Record<InputDataType, string> = {
 	Hora: 'Hora',
 	Email: 'E-mail',
 	URL: 'URL',
-	CEP: 'CEP (Código Postal)',
+	CEP: 'CEP',
 	Monetario: 'Monetário',
 	Senha: 'Senha',
 	CaixaDeOpcoes: 'Caixa De Opções',

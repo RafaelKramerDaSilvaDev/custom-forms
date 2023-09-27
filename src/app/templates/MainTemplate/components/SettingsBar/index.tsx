@@ -13,10 +13,10 @@ export function SettingsBar() {
 	return (
 		<SettingsBarContainer>
 			<Instruction>Selecione o Componente:</Instruction>
-			<Button variant='link' colorScheme='black' onClick={() => handleSetOption('input')}>
-				Entrada
+			<Button variant='link' colorScheme='black' onClick={() => handleSetOption('input')} textTransform='uppercase'>
+				Campo de Entrada
 			</Button>
-			<Button variant='link' colorScheme='black' onClick={() => handleSetOption('button')}>
+			<Button variant='link' colorScheme='black' onClick={() => handleSetOption('button')} textTransform='uppercase'>
 				Botão
 			</Button>
 		</SettingsBarContainer>

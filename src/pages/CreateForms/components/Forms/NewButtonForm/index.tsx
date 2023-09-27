@@ -13,9 +13,9 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
 import { useCreateForms } from '../../../contexts/CreateFormsContext';
-import { ButtonAction } from '../../NewButton/types';
-import { Container, Description, Title } from '../styles';
 import { convertToButtonAction } from '../../../helpers/convertToButtonAction';
+import { ButtonActionType } from '../../../types';
+import { Container, Description, Title } from '../styles';
 
 const schema = object({
 	action: string().required('Campo Funcionalidade é Obrigatório.'),
@@ -40,7 +40,7 @@ export function NewButtonForm() {
 	type FormData = InferType<typeof schema>;
 
 	const onSubmit = (data: FormData) => {
-		const actionValue: ButtonAction = convertToButtonAction(data.action);
+		const actionValue: ButtonActionType = convertToButtonAction(data.action);
 
 		setForms((prev) => [
 			...prev,

@@ -1,6 +1,6 @@
-import { ButtonAction } from '../components/NewButton/types';
+import { ButtonActionType } from '../types';
 
-export function convertToButtonAction(value: string): ButtonAction {
+export function convertToButtonAction(value: string): ButtonActionType {
 	switch (value) {
 		case 'Salvar':
 			return 'save';
