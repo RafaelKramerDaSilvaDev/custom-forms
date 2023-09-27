@@ -1,6 +1,6 @@
 export enum DataType {
 	Texto = 'Texto',
-	TextoLongo = 'TextoLongo',
+	TextoGrande = 'TextoGrande',
 	Numero = 'Numero',
 	CPF = 'CPF',
 	CNPJ = 'CNPJ',

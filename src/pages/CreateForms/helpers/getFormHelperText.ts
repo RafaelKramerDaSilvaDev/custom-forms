@@ -2,21 +2,20 @@ import { InputDataType } from '../types/InputDataType';
 import { determinateGender } from '../../../app/utils/determinateGender';
 
 const DEFAULT_HELPER_TEXT: Record<InputDataType, string> = {
-	Texto: 'Preencha o texto no campo acima.',
-	TextoLongo: 'Preencha o texto no campo acima.',
-	Numero: 'Preencha o número no campo acima.',
+	Texto: '',
+	TextoGrande: '',
+	Numero: '',
 	CPF: 'Preencha o CPF no campo acima.',
 	CNPJ: 'Preencha o CNPJ no campo acima.',
-	CPFouCNPJ: 'Preencha o CPF ou CNPJ no campo acima.',
-	NumeroDeTelefone: 'Preencha o número de telefone no campo acima.',
+	Telefone: 'Preencha o telefone no campo acima.',
 	Data: 'Preencha a data no campo acima.',
 	Hora: 'Preencha a hora no campo acima.',
 	Email: 'Preencha o e-mail no campo acima.',
 	URL: 'Preencha a URL no campo acima.',
 	CEP: 'Preencha o CEP no campo acima.',
-	Moeda: 'Preencha o valor no campo acima.',
+	Monetario: '',
 	Senha: 'Preencha a senha no campo acima.',
-	SimOuNao: 'Selecione uma opção no campo acima.',
+	CaixaDeOpcoes: 'Selecione uma opção no campo acima.',
 	Cor: 'Selecione uma cor campo acima.',
 };
 

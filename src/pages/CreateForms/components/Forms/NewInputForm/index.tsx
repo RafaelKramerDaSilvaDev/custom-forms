@@ -19,7 +19,7 @@ import { getFormHelperText } from '../../../helpers/getFormHelperText';
 import { getPlaceholders } from '../../../helpers/getPlaceholders';
 import { InputDataType } from '../../../types/InputDataType';
 import { Container, Description, Title } from '../styles';
-import { InputDataTypeOptions } from './constants';
+import { ComboBoxOptionsText } from '../../../constants';
 
 const schema = object({
 	dataType: string().required('Campo Tipo de Dado é Obrigatório'),
@@ -68,13 +68,13 @@ export function NewInputForm() {
 	const watchName = watch('name');
 
 	useEffect(() => {
-		const formattedValue = InputDataTypeOptions[watchDataType];
+		const formattedValue = ComboBoxOptionsText[watchDataType];
 
 		if (!nameModified) {
 			setValue('name', formattedValue);
 		}
 
-		if (!watchName || watchName === InputDataTypeOptions[watchDataType]) {
+		if (!watchName || watchName === ComboBoxOptionsText[watchDataType]) {
 			setValue('label', formattedValue);
 		} else {
 			setValue('label', watchName);
@@ -88,7 +88,7 @@ export function NewInputForm() {
 			formHelperText = getFormHelperText(watchDataType, null);
 		}
 
-		if (watchName && watchName !== InputDataTypeOptions[watchDataType]) {
+		if (watchName && watchName !== ComboBoxOptionsText[watchDataType]) {
 			placeholder = getPlaceholders(null, watchName);
 			formHelperText = getFormHelperText(null, watchName);
 		}
@@ -111,7 +111,7 @@ export function NewInputForm() {
 					<FormControl isRequired isInvalid={Boolean(errors.dataType)}>
 						<FormLabel>Tipo de Dado</FormLabel>
 						<Select defaultValue='Texto' {...register('dataType')}>
-							{Object.entries(InputDataTypeOptions).map(([key, value]) => (
+							{Object.entries(ComboBoxOptionsText).map(([key, value]) => (
 								<option key={key} value={key}>
 									{value}
 								</option>

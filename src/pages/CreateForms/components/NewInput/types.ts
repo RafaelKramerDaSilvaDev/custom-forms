@@ -13,7 +13,7 @@ export interface NewInputProps {
 
 export const dataTypeToInputType: Record<DataType, InputProps> = {
 	[DataType.Texto]: 'text',
-	[DataType.TextoLongo]: 'text',
+	[DataType.TextoGrande]: 'text',
 	[DataType.Numero]: 'number',
 	[DataType.CPF]: 'text',
 	[DataType.CNPJ]: 'text',
