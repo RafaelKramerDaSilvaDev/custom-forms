@@ -5,3 +5,4 @@ export * from './FormItemType';
 export * from './InputDataType';
 export * from './InputItemType';
 export * from './NewButtonType';
+export * from './NewInputType';

@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import { InferType, object, string } from 'yup';
-import { COMBOBOX_OPTIONS_TEXT, DEFAULT_LABELS } from '../../../constants';
+import { COMBOBOX_OPTIONS, DEFAULT_LABELS } from '../../../constants';
 import { useCreateForms } from '../../../contexts/CreateFormsContext';
 import { DataType } from '../../../enums/DataType';
 import { getFormHelperText } from '../../../helpers/getFormHelperText';
@@ -101,7 +101,7 @@ export function NewInputForm() {
 					<FormControl isRequired isInvalid={Boolean(errors.dataType)}>
 						<FormLabel>Tipo de Dado</FormLabel>
 						<Select defaultValue='Texto' {...register('dataType')}>
-							{Object.entries(COMBOBOX_OPTIONS_TEXT).map(([key, value]) => (
+							{Object.entries(COMBOBOX_OPTIONS).map(([key, value]) => (
 								<option key={key} value={key}>
 									{value}
 								</option>

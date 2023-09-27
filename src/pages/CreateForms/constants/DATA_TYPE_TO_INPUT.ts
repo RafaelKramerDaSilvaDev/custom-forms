@@ -1,16 +1,7 @@
-import { InputProps } from '../../../../app/types';
-import { DataType } from '../../enums/DataType';
+import { InputProps } from '../../../app/types';
+import { DataType } from '../enums/DataType';
 
-export interface NewInputProps {
-	id: string;
-	dataType: DataType;
-	label: string;
-	placeholder: string;
-	isRequired: boolean;
-	initialValue?: string;
-}
-
-export const dataTypeToInputType: Record<DataType, InputProps> = {
+export const DATA_TYPE_TO_INPUT: Record<DataType, InputProps> = {
 	[DataType.Texto]: 'text',
 	[DataType.TextoGrande]: 'text',
 	[DataType.Numero]: 'number',

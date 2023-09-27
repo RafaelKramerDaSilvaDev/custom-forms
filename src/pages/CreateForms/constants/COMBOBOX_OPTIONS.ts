@@ -1,6 +1,6 @@
 import { InputDataType } from '../types';
 
-export const COMBOBOX_OPTIONS_TEXT: Record<InputDataType, string> = {
+export const COMBOBOX_OPTIONS: Record<InputDataType, string> = {
 	Texto: 'Texto (Tamanho Padrão)',
 	TextoGrande: 'Texto Grande (Tamanho Maior)',
 	Numero: 'Número (Aceita Apenas Números)',

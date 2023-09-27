@@ -1,6 +1,6 @@
-import { NewInputProps } from '../components/NewInput/types';
+import { NewInputType } from '.';
 
 export interface InputItemType {
 	type: 'input';
-	data: NewInputProps;
+	data: NewInputType;
 }
