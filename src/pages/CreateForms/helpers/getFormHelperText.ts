@@ -10,7 +10,7 @@ export function getFormHelperText(dataType: InputDataType | null, name: string |
 		if (gender === 'o' || gender === 'a') {
 			return `Preencha ${gender} ${name} no campo acima.`;
 		} else {
-			return `Preencha ${name}`;
+			return `Preencha ${name}.`;
 		}
 	} else {
 		return '';

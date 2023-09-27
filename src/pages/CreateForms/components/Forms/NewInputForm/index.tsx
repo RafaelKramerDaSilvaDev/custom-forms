@@ -9,7 +9,7 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import { InferType, object, string } from 'yup';
@@ -19,13 +19,11 @@ import { DataType } from '../../../enums/DataType';
 import { getFormHelperText } from '../../../helpers/getFormHelperText';
 import { getPlaceholders } from '../../../helpers/getPlaceholders';
 import { InputDataType } from '../../../types/InputDataType';
-import { Container, Description, Title } from '../styles';
-import { DEFAULT_NAMES } from '../../../constants/DEFAULT_NAMES';
 import { checkPlaceholderExistence } from '../../../validators/checkPlaceholderExistence';
+import { Container, Description, Title } from '../styles';
 
 const schema = object({
 	dataType: string().required('Campo Tipo de Dado é Obrigatório'),
-	name: string().required('Campo Nome é Obrigatório'),
 	label: string().required('Campo Label é Obrigatório'),
 	placeholder: string().required('Campo Placeholder é Obrigatório'),
 	isRequired: string().oneOf(['Obrigatório', 'Opcional']).required('Campo Requisito é Obrigatório'),
@@ -34,8 +32,10 @@ const schema = object({
 });
 
 export function NewInputForm() {
-	const [nameModified, setNameModified] = useState(false);
 	const [placeholderExistence, setPlaceholderExistence] = useState(false);
+	const labelModifiedRef = useRef(false);
+	const [labelModified, setLabelModified] = useState(false);
+	const [isLabelModified, setIsLabelModified] = useState(false);
 
 	const { setForms } = useCreateForms();
 	const {
@@ -57,7 +57,6 @@ export function NewInputForm() {
 				data: {
 					id: uuidv4(),
 					dataType: data.dataType as DataType,
-					name: data.name,
 					label: data.label,
 					placeholder: data.placeholder,
 					isRequired: data.isRequired === 'Obrigatório' ? true : false,
@@ -68,40 +67,34 @@ export function NewInputForm() {
 	};
 
 	const watchDataType = watch('dataType') as InputDataType;
-	const watchName = watch('name');
+	const watchLabel = watch('label');
 
 	useEffect(() => {
-		const newLabel = DEFAULT_LABELS[watchDataType];
-		const newName = DEFAULT_NAMES[watchDataType];
-
-		if (!nameModified) {
-			setValue('name', newName);
-		}
-
-		if (!watchName || watchName === COMBOBOX_OPTIONS_TEXT[watchDataType]) {
-			setValue('label', newLabel);
-		} else {
-			setValue('label', newLabel);
-		}
-
 		let placeholder;
 		let formHelperText;
 
 		if (watchDataType) {
+			if (!isLabelModified) {
+				const defaultLabel = DEFAULT_LABELS[watchDataType];
+				setValue('label', defaultLabel || '');
+			}
+
 			placeholder = getPlaceholders(watchDataType, null);
 			formHelperText = getFormHelperText(watchDataType, null);
+
+			setIsLabelModified(false);
 		}
 
-		if (watchName && watchName !== COMBOBOX_OPTIONS_TEXT[watchDataType]) {
-			placeholder = getPlaceholders(null, watchName);
-			formHelperText = getFormHelperText(null, watchName);
+		if (isLabelModified && watchLabel) {
+			placeholder = getPlaceholders(null, watchLabel);
+			formHelperText = getFormHelperText(null, watchLabel);
 		}
 
 		setValue('placeholder', placeholder || '');
 		setValue('formHelperText', formHelperText || '');
 
 		setPlaceholderExistence(checkPlaceholderExistence(watchDataType));
-	}, [watchName, watchDataType]);
+	}, [watchLabel, watchDataType]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -126,10 +119,7 @@ export function NewInputForm() {
 						{errors.dataType ? (
 							<FormErrorMessage>{errors.dataType.message}</FormErrorMessage>
 						) : (
-							<FormHelperText>
-								Defina o tipo de dado aceito pelo Campo De Entrada. Se um tipo diferente for inserido no formulário, ele
-								exibirá um erro e impedirá a continuação.
-							</FormHelperText>
+							<FormHelperText>Defina o tipo de dado aceito pelo campo.</FormHelperText>
 						)}
 					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.isRequired)}>
@@ -141,27 +131,24 @@ export function NewInputForm() {
 						{errors.isRequired ? (
 							<FormErrorMessage>{errors.isRequired.message}</FormErrorMessage>
 						) : (
-							<FormHelperText>Defina se esse é um Campo de Entrada obrigatório ou opcional.</FormHelperText>
+							<FormHelperText>Defina se esse campo é obrigatório ou opcional.</FormHelperText>
 						)}
 					</FormControl>
-					<FormControl isRequired isInvalid={Boolean(errors.name)}>
-						<FormLabel>Nome do Campo Personalizado</FormLabel>
+					<FormControl isRequired isInvalid={Boolean(errors.label)}>
+						<FormLabel>Nome do Campo</FormLabel>
 						<Input
 							type='text'
-							placeholder='Digite o nome de identificação'
-							{...register('name')}
+							placeholder='Digite o nome do campo'
+							{...register('label')}
 							onChange={(e) => {
-								setNameModified(true);
-								register('name').onChange(e);
+								setIsLabelModified(true);
+								register('label').onChange(e);
 							}}
 						/>
-
-						{errors.name ? (
-							<FormErrorMessage>{errors.name.message}</FormErrorMessage>
+						{errors.label ? (
+							<FormErrorMessage>{errors.label.message}</FormErrorMessage>
 						) : (
-							<FormHelperText>
-								O Nome de Identificação serve apenas como identificador do Campo De Entrada.
-							</FormHelperText>
+							<FormHelperText>É o nome dado a um campo de formulário.</FormHelperText>
 						)}
 					</FormControl>
 					{placeholderExistence && (
@@ -172,23 +159,11 @@ export function NewInputForm() {
 								<FormErrorMessage>{errors.placeholder.message}</FormErrorMessage>
 							) : (
 								<FormHelperText>
-									Um placeholder indica o que inserir em um campo de entrada. Ele mostra uma dica no campo e some ao
-									começar a digitar.
+									Indica o que inserir em um campo de entrada. Ele mostra uma dica no campo e some ao começar a digitar.
 								</FormHelperText>
 							)}
 						</FormControl>
 					)}
-					<FormControl isRequired isInvalid={Boolean(errors.label)}>
-						<FormLabel>Label</FormLabel>
-						<Input type='text' placeholder='Digite o nome da label' {...register('label')} />
-						{errors.label ? (
-							<FormErrorMessage>{errors.label.message}</FormErrorMessage>
-						) : (
-							<FormHelperText>
-								A Label é o texto exibido acima do Campo de Entrada para identificar o campo.
-							</FormHelperText>
-						)}
-					</FormControl>
 					<FormControl isInvalid={Boolean(errors.formHelperText)}>
 						<FormLabel>Mensagem Auxiliar</FormLabel>
 						<Input placeholder='Selecione o requisito da entrada' {...register('formHelperText')} />
@@ -196,7 +171,7 @@ export function NewInputForm() {
 							<FormErrorMessage>{errors.formHelperText.message}</FormErrorMessage>
 						) : (
 							<FormHelperText>
-								Mensagem exibida abaixo do Campo de Entrada para guiar o usuário sobre sua finalidade ou preenchimento.
+								Mensagem exibida abaixo do campo para guiar o usuário sobre sua finalidade ou preenchimento.
 							</FormHelperText>
 						)}
 					</FormControl>

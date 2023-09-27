@@ -21,7 +21,6 @@ export function PreviewForm() {
 								label={inputData.label}
 								dataType={inputData.dataType}
 								isRequired={inputData.isRequired}
-								name={inputData.name}
 								placeholder={inputData.placeholder}
 							/>
 						);

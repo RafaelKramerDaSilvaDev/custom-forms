@@ -4,7 +4,6 @@ import { DataType } from '../../enums/DataType';
 export interface NewInputProps {
 	id: string;
 	dataType: DataType;
-	name: string;
 	label: string;
 	placeholder: string;
 	isRequired: boolean;
