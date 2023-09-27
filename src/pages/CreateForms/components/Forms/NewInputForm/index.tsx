@@ -9,7 +9,7 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import { InferType, object, string } from 'yup';
@@ -32,6 +32,8 @@ const schema = object({
 });
 
 export function NewInputForm() {
+	const [nameModified, setNameModified] = useState(false);
+
 	const { setForms } = useCreateForms();
 	const {
 		register,
@@ -67,9 +69,16 @@ export function NewInputForm() {
 
 	useEffect(() => {
 		const formattedValue = InputDataTypeOptions[watchDataType];
-		setValue('label', formattedValue);
-		setValue('label', watchName);
-		setValue('name', formattedValue);
+
+		if (!nameModified) {
+			setValue('name', formattedValue);
+		}
+
+		if (!watchName || watchName === InputDataTypeOptions[watchDataType]) {
+			setValue('label', formattedValue);
+		} else {
+			setValue('label', watchName);
+		}
 
 		let placeholder;
 		let formHelperText;
@@ -131,7 +140,16 @@ export function NewInputForm() {
 					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.name)}>
 						<FormLabel>Nome de Identificação</FormLabel>
-						<Input type='text' placeholder='Digite o nome de identificação' {...register('name')} />
+						<Input
+							type='text'
+							placeholder='Digite o nome de identificação'
+							{...register('name')}
+							onChange={(e) => {
+								setNameModified(true);
+								register('name').onChange(e);
+							}}
+						/>
+
 						{errors.name ? (
 							<FormErrorMessage>{errors.name.message}</FormErrorMessage>
 						) : (
