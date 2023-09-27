@@ -1,4 +1,4 @@
-import { DataType } from '../components/NewInput/types';
+import { DataType } from '../enums/DataType';
 import { FormItem } from '../types';
 
 export const mockedFormItems: FormItem[] = [

@@ -1,4 +1,5 @@
-import { InputProps } from '../../../../app/shared/types/InputProps';
+import { InputProps } from '../../../../app/types';
+import { DataType } from '../../enums/DataType';
 
 export interface NewInputProps {
 	id: string;
@@ -8,25 +9,6 @@ export interface NewInputProps {
 	placeholder: string;
 	isRequired: boolean;
 	initialValue?: string;
-}
-
-export enum DataType {
-	Texto = 'Texto',
-	TextoLongo = 'TextoLongo',
-	Numero = 'Numero',
-	CPF = 'CPF',
-	CNPJ = 'CNPJ',
-	CPFouCNPJ = 'CPFouCNPJ',
-	NumeroDeTelefone = 'NumeroDeTelefone',
-	Data = 'Data',
-	Hora = 'Hora',
-	Email = 'Email',
-	URL = 'URL',
-	CEP = 'CEP',
-	Moeda = 'Moeda',
-	Senha = 'Senha',
-	SimOuNao = 'SimOuNao',
-	Cor = 'Cor',
 }
 
 export const dataTypeToInputType: Record<DataType, InputProps> = {

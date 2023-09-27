@@ -14,10 +14,10 @@ import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import { InferType, object, string } from 'yup';
 import { useCreateForms } from '../../../contexts/CreateFormsContext';
+import { DataType } from '../../../enums/DataType';
 import { getFormHelperText } from '../../../helpers/getFormHelperText';
 import { getPlaceholders } from '../../../helpers/getPlaceholders';
 import { InputDataType } from '../../../types/InputDataType';
-import { DataType } from '../../NewInput/types';
 import { Container, Description, Title } from '../styles';
 import { InputDataTypeOptions } from './constants';
 

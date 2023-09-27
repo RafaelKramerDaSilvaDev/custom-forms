@@ -1,4 +1,4 @@
-import { ColorSchemesProps } from '../../../../app/shared/types';
+import { ColorSchemesProps } from '../../../../app/types';
 
 export type ButtonConfig = {
 	icon: React.ReactElement<any, string | React.JSXElementConstructor<any>>;
