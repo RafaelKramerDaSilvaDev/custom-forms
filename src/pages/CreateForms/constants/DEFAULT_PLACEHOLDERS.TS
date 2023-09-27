@@ -1,8 +1,6 @@
-// import { InputDataType } from '../types';
+import { InputDataType } from '../types';
 
-// export const DEFAULT_PLACEHOLDERS: Record<InputDataType, string> = {
-
-export const DEFAULT_PLACEHOLDERS = {
+export const DEFAULT_PLACEHOLDERS: Record<InputDataType, string> = {
 	Texto: '',
 	TextoGrande: '',
 	Numero: '',
