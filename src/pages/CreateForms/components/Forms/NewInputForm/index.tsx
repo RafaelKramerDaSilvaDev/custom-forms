@@ -14,12 +14,12 @@ import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import { InferType, object, string } from 'yup';
 import { useCreateForms } from '../../../contexts/CreateFormsContext';
+import { getFormHelperText } from '../../../helpers/getFormHelperText';
+import { getPlaceholders } from '../../../helpers/getPlaceholders';
+import { InputDataType } from '../../../types/InputDataType';
 import { DataType } from '../../NewInput/types';
 import { Container, Description, Title } from '../styles';
 import { InputDataTypeOptions } from './constants';
-import { InputDataType } from './types';
-import { getFormHelperText } from './utils/getFormHelperText';
-import { getPlaceholders } from '../../../helpers/getPlaceholders';
 
 const schema = object({
 	dataType: string().required('Campo Tipo de Dado é Obrigatório'),
@@ -66,34 +66,27 @@ export function NewInputForm() {
 	const watchName = watch('name');
 
 	useEffect(() => {
-		const newFormHelperText = watchDataType && `${getFormHelperText(watchDataType)}`;
 		const formattedValue = InputDataTypeOptions[watchDataType];
-
-		setValue('formHelperText', newFormHelperText);
 		setValue('label', formattedValue);
+		setValue('label', watchName);
+		setValue('name', formattedValue);
 
 		let placeholder;
+		let formHelperText;
 
 		if (watchDataType) {
 			placeholder = getPlaceholders(watchDataType, null);
+			formHelperText = getFormHelperText(watchDataType, null);
 		}
 
-		// Checa se watchName é diferente de InputDataTypeOptions[watchDataType],
-		// o que indica que um valor personalizado foi digitado.
 		if (watchName && watchName !== InputDataTypeOptions[watchDataType]) {
 			placeholder = getPlaceholders(null, watchName);
+			formHelperText = getFormHelperText(null, watchName);
 		}
 
 		setValue('placeholder', placeholder || '');
-
-		setValue('label', watchName);
+		setValue('formHelperText', formHelperText || '');
 	}, [watchName, watchDataType]);
-
-	useEffect(() => {
-		// Atualiza o nome de Identificação quando o Tipo de Dado é alterado
-		const formattedValue = InputDataTypeOptions[watchDataType];
-		setValue('name', formattedValue);
-	}, [watchDataType]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -108,7 +101,7 @@ export function NewInputForm() {
 				<Stack>
 					<FormControl isRequired isInvalid={Boolean(errors.dataType)}>
 						<FormLabel>Tipo de Dado</FormLabel>
-						<Select defaultValue='TExto' {...register('dataType')}>
+						<Select defaultValue='Texto' {...register('dataType')}>
 							{Object.entries(InputDataTypeOptions).map(([key, value]) => (
 								<option key={key} value={key}>
 									{value}

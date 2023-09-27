@@ -1,4 +1,4 @@
-import { ButtonAction } from '../../NewButton/types';
+import { ButtonAction } from '../components/NewButton/types';
 
 export function convertToButtonAction(value: string): ButtonAction {
 	switch (value) {

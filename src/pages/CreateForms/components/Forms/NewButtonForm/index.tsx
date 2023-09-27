@@ -15,7 +15,7 @@ import { InferType, object, string } from 'yup';
 import { useCreateForms } from '../../../contexts/CreateFormsContext';
 import { ButtonAction } from '../../NewButton/types';
 import { Container, Description, Title } from '../styles';
-import { convertToButtonAction } from './convertToButtonAction';
+import { convertToButtonAction } from '../../../helpers/convertToButtonAction';
 
 const schema = object({
 	action: string().required('Campo Funcionalidade é Obrigatório.'),

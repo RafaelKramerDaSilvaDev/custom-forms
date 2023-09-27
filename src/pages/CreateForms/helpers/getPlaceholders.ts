@@ -1,4 +1,4 @@
-import { InputDataType } from '../components/Forms/NewInputForm/types';
+import { InputDataType } from '../types/InputDataType';
 import { determinateGender } from '../../../app/utils/determinateGender';
 
 const DEFAULT_PLACEHOLDERS: Record<InputDataType, string> = {

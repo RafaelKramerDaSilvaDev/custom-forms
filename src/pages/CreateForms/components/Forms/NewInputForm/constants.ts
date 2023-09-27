@@ -1,4 +1,4 @@
-import { InputDataType } from './types';
+import { InputDataType } from '../../../types/InputDataType';
 
 export const InputDataTypeOptions: Record<InputDataType, string> = {
 	Texto: 'Texto',
