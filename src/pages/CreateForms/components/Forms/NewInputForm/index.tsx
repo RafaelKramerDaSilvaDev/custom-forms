@@ -9,7 +9,7 @@ import {
 	Stack,
 } from '@chakra-ui/react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import { InferType, object, string } from 'yup';
@@ -20,7 +20,7 @@ import { getFormHelperText } from '../../../helpers/getFormHelperText';
 import { getPlaceholders } from '../../../helpers/getPlaceholders';
 import { InputDataType } from '../../../types/InputDataType';
 import { checkPlaceholderExistence } from '../../../validators/checkPlaceholderExistence';
-import { Container, Description, Title } from '../styles';
+import { Container } from '../styles';
 
 const schema = object({
 	dataType: string().required('Campo Tipo de Dado é Obrigatório'),
@@ -33,8 +33,6 @@ const schema = object({
 
 export function NewInputForm() {
 	const [placeholderExistence, setPlaceholderExistence] = useState(false);
-	const labelModifiedRef = useRef(false);
-	const [labelModified, setLabelModified] = useState(false);
 	const [isLabelModified, setIsLabelModified] = useState(false);
 
 	const { setForms } = useCreateForms();
@@ -99,13 +97,6 @@ export function NewInputForm() {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
 			<Container>
-				<Title>
-					Criar Novo: <span>Campo De Entrada</span>
-				</Title>
-				<Description>
-					O <span>Campo de Entrada</span> serve para inserção de informações, como texto, número, data de nascimento,
-					endereço, entre outros.
-				</Description>
 				<Stack>
 					<FormControl isRequired isInvalid={Boolean(errors.dataType)}>
 						<FormLabel>Tipo de Dado</FormLabel>

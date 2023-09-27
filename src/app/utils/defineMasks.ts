@@ -8,7 +8,7 @@ export function defineMasks(type: DataType): string {
 			return '99.999.999/9999-99';
 		case DataType.CEP:
 			return '99999-999';
-		case DataType.NumeroDeTelefone:
+		case DataType.Telefone:
 			return '(99) 99999-9999';
 	}
 	return '';

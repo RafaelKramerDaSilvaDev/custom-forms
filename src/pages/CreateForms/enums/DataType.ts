@@ -5,7 +5,7 @@ export enum DataType {
 	CPF = 'CPF',
 	CNPJ = 'CNPJ',
 	CPFouCNPJ = 'CPFouCNPJ',
-	NumeroDeTelefone = 'NumeroDeTelefone',
+	Telefone = 'Telefone',
 	Data = 'Data',
 	Hora = 'Hora',
 	Email = 'Email',

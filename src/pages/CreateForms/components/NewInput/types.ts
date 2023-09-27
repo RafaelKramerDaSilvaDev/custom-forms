@@ -17,7 +17,7 @@ export const dataTypeToInputType: Record<DataType, InputProps> = {
 	[DataType.CPF]: 'text',
 	[DataType.CNPJ]: 'text',
 	[DataType.CPFouCNPJ]: 'text',
-	[DataType.NumeroDeTelefone]: 'tel',
+	[DataType.Telefone]: 'tel',
 	[DataType.Data]: 'date',
 	[DataType.Hora]: 'time',
 	[DataType.Email]: 'email',
