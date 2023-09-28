@@ -12,10 +12,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { InferType, object, string } from 'yup';
-import { useCreateForms } from '../../../contexts/CreateFormsContext';
-import { convertToButtonAction } from '../../../helpers/convertToButtonAction';
-import { ButtonActionType } from '../../../types';
-import { Container, Description, Title } from '../styles';
+import { useCreateForms } from '../../contexts/CreateFormsContext';
+import { convertToButtonAction } from '../../helpers/convertToButtonAction';
+import { ButtonActionType } from '../../types';
+import { Container, Description, Title } from './styles';
 
 const schema = object({
 	action: string().required('Campo Funcionalidade é Obrigatório.'),

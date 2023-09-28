@@ -1,9 +1,9 @@
 import { InputDataType } from '../types';
 
-export const DEFAULT_LABELS: Record<InputDataType, string> = {
-	Texto: '',
-	TextoGrande: '',
-	Numero: '',
+export const comboboxOptions: Record<InputDataType, string> = {
+	Texto: 'Texto (Tamanho Padrão)',
+	TextoGrande: 'Texto Grande (Tamanho Maior)',
+	Numero: 'Número (Aceita Apenas Números)',
 	CPF: 'CPF',
 	CNPJ: 'CNPJ',
 	Telefone: 'Telefone',
@@ -14,6 +14,6 @@ export const DEFAULT_LABELS: Record<InputDataType, string> = {
 	CEP: 'CEP',
 	Monetario: 'Monetário',
 	Senha: 'Senha',
-	CaixaDeOpcoes: '',
+	CaixaDeOpcoes: 'Caixa De Opções',
 	Cor: 'Cor',
 };

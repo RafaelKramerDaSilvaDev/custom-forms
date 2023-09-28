@@ -8,9 +8,3 @@ export const PreviewFormContainer = styled.div`
 	border-radius: 8px;
 	margin: 24px;
 `;
-
-export const Title = styled.h1`
-	font-size: ${({ theme }) => theme.height.small};
-	font-weight: 600;
-	margin-bottom: 20px;
-`;

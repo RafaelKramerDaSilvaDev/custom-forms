@@ -6,5 +6,6 @@ export type NewInputType = {
 	label: string;
 	placeholder: string;
 	isRequired: boolean;
+	formHelperText: string;
 	initialValue?: string;
 };

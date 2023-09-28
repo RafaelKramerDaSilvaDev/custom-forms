@@ -1,10 +1,10 @@
 import { InputDataType } from '../types/InputDataType';
 import { determinateGender } from '../../../app/utils/determinateGender';
-import { DEFAULT_HELPER_TEXT } from '../constants';
+import { defaultHelperText } from '../constants';
 
 export function getFormHelperText(dataType: InputDataType | null, name: string | null): string {
-	if (dataType && dataType in DEFAULT_HELPER_TEXT) {
-		return DEFAULT_HELPER_TEXT[dataType];
+	if (dataType && dataType in defaultHelperText) {
+		return defaultHelperText[dataType];
 	} else if (name) {
 		const gender = determinateGender(name);
 		if (gender === 'o' || gender === 'a') {

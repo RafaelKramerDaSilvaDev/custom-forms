@@ -2,14 +2,13 @@ import { Stack } from '@chakra-ui/react';
 import { useCreateForms } from '../../contexts/CreateFormsContext';
 import { NewButton } from '../NewButton';
 import { NewInput } from '../NewInput';
-import { PreviewFormContainer, Title } from './styles';
+import { PreviewFormContainer } from './styles';
 
 export function PreviewForm() {
 	const { forms } = useCreateForms();
 
 	return (
 		<PreviewFormContainer>
-			<Title>Pré-visualização do Formulário</Title>
 			<Stack>
 				{forms.map((item, index) => {
 					if (item.type === 'input') {
@@ -22,6 +21,8 @@ export function PreviewForm() {
 								dataType={inputData.dataType}
 								isRequired={inputData.isRequired}
 								placeholder={inputData.placeholder}
+								formHelperText={inputData.formHelperText}
+								initialValue={inputData.initialValue}
 							/>
 						);
 					} else if (item.type === 'button') {

@@ -13,14 +13,14 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import { InferType, object, string } from 'yup';
-import { COMBOBOX_OPTIONS, DEFAULT_LABELS } from '../../../constants';
-import { useCreateForms } from '../../../contexts/CreateFormsContext';
-import { DataType } from '../../../enums/DataType';
-import { getFormHelperText } from '../../../helpers/getFormHelperText';
-import { getPlaceholders } from '../../../helpers/getPlaceholders';
-import { InputDataType } from '../../../types/InputDataType';
-import { checkPlaceholderExistence } from '../../../validators/checkPlaceholderExistence';
-import { Container } from '../styles';
+import { comboboxOptions, defaultLabels } from '../../constants';
+import { useCreateForms } from '../../contexts/CreateFormsContext';
+import { DataType } from '../../enums/DataType';
+import { getFormHelperText } from '../../helpers/getFormHelperText';
+import { getPlaceholders } from '../../helpers/getPlaceholders';
+import { InputDataType } from '../../types/InputDataType';
+import { checkPlaceholderExistence } from '../../validators/checkPlaceholderExistence';
+import { Container } from './styles';
 
 const schema = object({
 	dataType: string().required('Campo Tipo de Dado é Obrigatório'),
@@ -58,6 +58,7 @@ export function NewInputForm() {
 					label: data.label,
 					placeholder: data.placeholder,
 					isRequired: data.isRequired === 'Obrigatório' ? true : false,
+					formHelperText: data.formHelperText || '',
 					initialValue: data.initialValue,
 				},
 			},
@@ -73,7 +74,7 @@ export function NewInputForm() {
 
 		if (watchDataType) {
 			if (!isLabelModified) {
-				const defaultLabel = DEFAULT_LABELS[watchDataType];
+				const defaultLabel = defaultLabels[watchDataType];
 				setValue('label', defaultLabel || '');
 			}
 
@@ -101,7 +102,7 @@ export function NewInputForm() {
 					<FormControl isRequired isInvalid={Boolean(errors.dataType)}>
 						<FormLabel>Tipo de Dado</FormLabel>
 						<Select defaultValue='Texto' {...register('dataType')}>
-							{Object.entries(COMBOBOX_OPTIONS).map(([key, value]) => (
+							{Object.entries(comboboxOptions).map(([key, value]) => (
 								<option key={key} value={key}>
 									{value}
 								</option>

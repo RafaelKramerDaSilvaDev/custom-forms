@@ -1,6 +1,6 @@
 import { InputDataType } from '../types';
 
-export const DEFAULT_HELPER_TEXT: Record<InputDataType, string> = {
+export const defaultHelperText: Record<InputDataType, string> = {
 	Texto: '',
 	TextoGrande: '',
 	Numero: '',
