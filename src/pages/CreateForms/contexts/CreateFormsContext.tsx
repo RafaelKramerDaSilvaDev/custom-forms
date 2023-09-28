@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useState } from 'react';
-import { OptionSettingsBar } from '../../../app/templates/MainTemplate/components/SettingsBar/types';
+import { OptionSettingsBar } from '../../../app/types/OptionSettingsBar';
 import { FormItemType } from '../types';
 
 type CreateFormsContextType = {

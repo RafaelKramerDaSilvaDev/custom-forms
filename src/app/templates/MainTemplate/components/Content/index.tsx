@@ -1,11 +1,9 @@
-import { SettingsBar } from '../SettingsBar';
-import { ContentContainer, ContentStylized } from './styles';
+import { ContentContainer } from './styles';
 
-export function Content({ children }: { children: React.ReactNode }) {
-	return (
-		<ContentContainer>
-			<SettingsBar />
-			<ContentStylized>{children}</ContentStylized>
-		</ContentContainer>
-	);
+type ContentType = {
+	children: React.ReactNode;
+};
+
+export function Content({ children }: ContentType) {
+	return <ContentContainer>{children}</ContentContainer>;
 }

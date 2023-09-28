@@ -15,7 +15,7 @@ import { InferType, object, string } from 'yup';
 import { useCreateForms } from '../../contexts/CreateFormsContext';
 import { convertToButtonAction } from '../../helpers/convertToButtonAction';
 import { ButtonActionType } from '../../types';
-import { Container, Description, Title } from './styles';
+import { Container } from './styles';
 
 const schema = object({
 	action: string().required('Campo Funcionalidade é Obrigatório.'),
@@ -67,13 +67,6 @@ export function NewButtonForm() {
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
 			<Container>
-				<Title>
-					Criar Novo: <span>Botão</span>
-				</Title>
-				<Description>
-					O <span>Botão</span> é um elemento clicável que executa uma ação específica, como enviar informações ou abrir
-					um menu.
-				</Description>
 				<Stack>
 					<FormControl isRequired isInvalid={Boolean(errors.action)}>
 						<FormLabel>Ação</FormLabel>

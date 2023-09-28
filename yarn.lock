@@ -2215,6 +2215,11 @@
   resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
+"@remix-run/router@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.9.0.tgz#9033238b41c4cbe1e961eccb3f79e2c588328cf6"
+  integrity sha512-bV63itrKBC0zdT27qYm6SDZHlkXwFL1xMBuhkn+X7l0+IIhNaH5wuuvZKp6eKhCD4KFhujhfhCT1YxXW6esUIA==
+
 "@swc/core-darwin-arm64@1.3.87":
   version "1.3.87"
   resolved "https://registry.yarnpkg.com/@swc/core-darwin-arm64/-/core-darwin-arm64-1.3.87.tgz#0547ec3297424ff89de503a07509646f48519e2a"
@@ -3604,6 +3609,21 @@ react-remove-scroll@^2.5.6:
     tslib "^2.1.0"
     use-callback-ref "^1.3.0"
     use-sidecar "^1.1.2"
+
+react-router-dom@^6.16.0:
+  version "6.16.0"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.16.0.tgz#86f24658da35eb66727e75ecbb1a029e33ee39d9"
+  integrity sha512-aTfBLv3mk/gaKLxgRDUPbPw+s4Y/O+ma3rEN1u8EgEpLpPe6gNjIsWt9rxushMHHMb7mSwxRGdGlGdvmFsyPIg==
+  dependencies:
+    "@remix-run/router" "1.9.0"
+    react-router "6.16.0"
+
+react-router@6.16.0:
+  version "6.16.0"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.16.0.tgz#abbf3d5bdc9c108c9b822a18be10ee004096fb81"
+  integrity sha512-VT4Mmc4jj5YyjpOi5jOf0I+TYzGpvzERy4ckNSvSh2RArv8LLoCxlsZ2D+tc7zgjxcY34oTz2hZaeX5RVprKqA==
+  dependencies:
+    "@remix-run/router" "1.9.0"
 
 react-style-singleton@^2.2.1:
   version "2.2.1"
