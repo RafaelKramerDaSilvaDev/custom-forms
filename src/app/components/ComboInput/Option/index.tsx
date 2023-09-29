@@ -1,21 +1,23 @@
 import { ReactNode } from 'react';
-import { OptionStylized } from './styles';
 import { useComboInput } from '../ComboInputContext';
+import { OptionStylized } from './styles';
 
-interface OptionProps {
+interface OptionProps extends React.HTMLAttributes<HTMLDivElement> {
 	children: ReactNode;
 	value?: string;
-	onClick?: React.MouseEventHandler<HTMLDivElement> | undefined;
 }
 
 export function Option({ children, value, onClick }: OptionProps) {
 	const { setValue, setIsOpen } = useComboInput();
 	const newValue = value ? value : String(children);
 
-	const handleOptionClick = () => {
+	const handleOptionClick = (event: React.MouseEvent<HTMLDivElement>) => {
 		setValue(newValue);
 		setIsOpen(false);
-		onClick;
+
+		if (onClick) {
+			onClick(event);
+		}
 	};
 
 	return <OptionStylized onClick={handleOptionClick}>{children}</OptionStylized>;

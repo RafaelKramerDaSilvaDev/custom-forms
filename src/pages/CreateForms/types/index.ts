@@ -14,3 +14,5 @@ export * from './InputDataTypes';
 export * from './InputComponentsTypes';
 export * from './InputTypes';
 export * from './InputPropertiesTypes';
+
+export * from './PhoneOptionsType';
