@@ -1,6 +1,6 @@
-import { InputDataType } from '../types';
+import { InputDataTypes } from '../types';
 
-export const defaultPlaceholders: Record<InputDataType, string> = {
+export const defaultPlaceholders: Record<InputDataTypes, string> = {
 	Texto: '',
 	TextoGrande: '',
 	Numero: '',

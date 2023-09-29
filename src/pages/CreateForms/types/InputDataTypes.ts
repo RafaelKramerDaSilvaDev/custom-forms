@@ -1,4 +1,4 @@
-export type InputDataType =
+export type InputDataTypes =
 	| 'Texto'
 	| 'TextoGrande'
 	| 'Numero'

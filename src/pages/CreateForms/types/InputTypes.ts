@@ -1,4 +1,4 @@
-export type InputProps =
+export type InputTypes =
 	| 'button'
 	| 'checkbox'
 	| 'color'

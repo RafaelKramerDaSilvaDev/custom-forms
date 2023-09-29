@@ -12,17 +12,12 @@ export function PreviewForm() {
 			<Stack>
 				{forms.map((item, index) => {
 					if (item.type === 'input') {
-						const inputData = item.data;
+						const properties = item.inputPropertiesTypes;
 						return (
 							<NewInput
-								key={inputData.id}
-								id={inputData.id}
-								label={inputData.label}
-								dataType={inputData.dataType}
-								isRequired={inputData.isRequired}
-								placeholder={inputData.placeholder}
-								formHelperText={inputData.formHelperText}
-								initialValue={inputData.initialValue}
+								key={properties.id}
+								inputDataTypes={item.inputDataTypes}
+								inputPropertiesTypes={item.inputPropertiesTypes}
 							/>
 						);
 					} else if (item.type === 'button') {

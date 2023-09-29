@@ -1,11 +1,6 @@
-import { DataType } from '../enums/DataType';
+import { InputDataTypes, InputPropertiesTypes } from '.';
 
 export type NewInputType = {
-	id: string;
-	dataType: DataType;
-	label: string;
-	placeholder: string;
-	isRequired: boolean;
-	formHelperText: string;
-	initialValue?: string;
+	inputDataTypes: InputDataTypes;
+	inputPropertiesTypes: InputPropertiesTypes;
 };

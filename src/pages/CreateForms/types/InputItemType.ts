@@ -1,6 +1,7 @@
-import { NewInputType } from '.';
+import { InputDataTypes, InputPropertiesTypes } from '.';
 
 export interface InputItemType {
 	type: 'input';
-	data: NewInputType;
+	inputDataTypes: InputDataTypes;
+	inputPropertiesTypes: InputPropertiesTypes;
 }

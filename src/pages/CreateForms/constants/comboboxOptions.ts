@@ -1,6 +1,6 @@
-import { InputDataType } from '../types';
+import { InputDataTypes } from '../types';
 
-export const comboboxOptions: Record<InputDataType, string> = {
+export const comboboxOptions: Record<InputDataTypes, string> = {
 	Texto: 'Texto (Tamanho Padrão)',
 	TextoGrande: 'Texto Grande (Tamanho Maior)',
 	Numero: 'Número (Aceita Apenas Números)',

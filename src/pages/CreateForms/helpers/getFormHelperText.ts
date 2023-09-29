@@ -1,8 +1,8 @@
-import { InputDataType } from '../types/InputDataType';
 import { determinateGender } from '../../../app/utils/determinateGender';
 import { defaultHelperText } from '../constants';
+import { InputDataTypes } from '../types';
 
-export function getFormHelperText(dataType: InputDataType | null, name: string | null): string {
+export function getFormHelperText(dataType: InputDataTypes | null, name: string | null): string {
 	if (dataType && dataType in defaultHelperText) {
 		return defaultHelperText[dataType];
 	} else if (name) {

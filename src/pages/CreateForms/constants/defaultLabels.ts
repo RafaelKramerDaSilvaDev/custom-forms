@@ -1,6 +1,6 @@
-import { InputDataType } from '../types';
+import { InputDataTypes } from '../types';
 
-export const defaultLabels: Record<InputDataType, string> = {
+export const defaultLabels: Record<InputDataTypes, string> = {
 	Texto: '',
 	TextoGrande: '',
 	Numero: '',

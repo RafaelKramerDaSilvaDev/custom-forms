@@ -1,8 +1,16 @@
 export * from './ButtonActionType';
 export * from './ButtonConfigType';
 export * from './ButtonItemType';
-export * from './FormItemType';
-export * from './InputDataType';
-export * from './InputItemType';
 export * from './NewButtonType';
+
+// Types corrigidos
+export * from './FormItemType';
+
+export * from './ButtonItemType';
+
+export * from './InputItemType';
 export * from './NewInputType';
+export * from './InputDataTypes';
+export * from './InputComponentsTypes';
+export * from './InputTypes';
+export * from './InputPropertiesTypes';

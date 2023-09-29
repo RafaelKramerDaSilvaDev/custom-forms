@@ -1,6 +1,6 @@
-import { InputDataType } from '../types';
+import { InputDataTypes } from '../types';
 
-export function checkPlaceholderExistence(watchDataType: InputDataType): boolean {
+export function checkPlaceholderExistence(watchDataType: InputDataTypes): boolean {
 	switch (watchDataType) {
 		case 'Texto':
 			return true;

@@ -15,10 +15,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { InferType, object, string } from 'yup';
 import { comboboxOptions, defaultLabels } from '../../constants';
 import { useCreateForms } from '../../contexts/CreateFormsContext';
-import { DataType } from '../../enums/DataType';
 import { getFormHelperText } from '../../helpers/getFormHelperText';
 import { getPlaceholders } from '../../helpers/getPlaceholders';
-import { InputDataType } from '../../types/InputDataType';
+import { InputDataTypes } from '../../types';
 import { checkPlaceholderExistence } from '../../validators/checkPlaceholderExistence';
 import { Container } from './styles';
 
@@ -26,7 +25,7 @@ const schema = object({
 	dataType: string().required('Campo Tipo de Dado é Obrigatório'),
 	label: string().required('Campo Label é Obrigatório'),
 	placeholder: string().required('Campo Placeholder é Obrigatório'),
-	isRequired: string().oneOf(['Obrigatório', 'Opcional']).required('Campo Requisito é Obrigatório'),
+	isRequired: string().required('Campo Requisito é Obrigatório'),
 	formHelperText: string(),
 	initialValue: string(),
 });
@@ -47,26 +46,28 @@ export function NewInputForm() {
 	});
 	type FormData = InferType<typeof schema>;
 
+	const watchDataType = watch('dataType') as InputDataTypes;
+	const watchLabel = watch('label');
+
 	const onSubmit = (data: FormData) => {
+		const isRequiredValue = data.isRequired === 'true' ? true : false;
+
 		setForms((prev) => [
 			...prev,
 			{
 				type: 'input',
-				data: {
+				inputDataTypes: data.dataType as InputDataTypes,
+				inputPropertiesTypes: {
 					id: uuidv4(),
-					dataType: data.dataType as DataType,
+					formHelperText: data.formHelperText,
+					isRequired: isRequiredValue,
 					label: data.label,
 					placeholder: data.placeholder,
-					isRequired: data.isRequired === 'Obrigatório' ? true : false,
-					formHelperText: data.formHelperText || '',
 					initialValue: data.initialValue,
 				},
 			},
 		]);
 	};
-
-	const watchDataType = watch('dataType') as InputDataType;
-	const watchLabel = watch('label');
 
 	useEffect(() => {
 		let placeholder;
@@ -116,9 +117,9 @@ export function NewInputForm() {
 					</FormControl>
 					<FormControl isRequired isInvalid={Boolean(errors.isRequired)}>
 						<FormLabel>Requisito</FormLabel>
-						<Select defaultValue='Opcional' {...register('isRequired')}>
-							<option>Opcional</option>
-							<option>Obrigatório</option>
+						<Select defaultValue={'false'} {...register('isRequired')}>
+							<option value={'false'}>Opcional</option>
+							<option value={'true'}>Obrigatório</option>
 						</Select>
 						{errors.isRequired ? (
 							<FormErrorMessage>{errors.isRequired.message}</FormErrorMessage>
