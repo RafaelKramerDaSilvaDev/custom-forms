@@ -1,7 +1,7 @@
 import { Stack } from '@chakra-ui/react';
 import { useCreateForms } from '../../contexts/CreateFormsContext';
-import { NewButton } from '../NewButton';
-import { NewInput } from '../NewInput';
+import { NewButton } from '../NewComponents/NewButton';
+import { NewInput } from '../NewComponents/NewInput';
 import { PreviewFormContainer } from './styles';
 
 export function PreviewForm() {

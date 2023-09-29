@@ -14,7 +14,6 @@ export const Combo = styled.div`
 	border-style: solid;
 	border-width: 1px;
 	border-color: rgb(229, 229, 229);
-	border-radius: 2px 0 0 0;
 	width: 50px;
 
 	cursor: pointer;
@@ -41,5 +40,4 @@ export const OptionsBox = styled.div`
 	border-width: 0 1px 1px 0;
 	border-color: rgb(229, 229, 229);
 	border-left: none;
-	border-radius: 0 0 2px 2px;
 `;

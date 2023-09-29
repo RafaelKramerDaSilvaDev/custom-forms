@@ -5,14 +5,10 @@ export const InputMaskStylized = styled(InputMask)`
 	border-style: solid;
 	border-width: 1px;
 	border-color: rgb(229, 229, 229);
-	border-radius: 2px;
 	border-left: none;
-	border-radius: 0 2px 0 0;
-
 	padding: 8px 16px;
 	height: 42px;
 	width: 100%;
-
 	outline: none;
 	width: 100%;
 `;
